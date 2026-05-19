@@ -1,0 +1,394 @@
+﻿Summary,Issue key,Issue id,Issue Type,Status,Project key,Project name,Project type,Project lead,Project lead id,Project description,Priority,Resolution,Assignee,Assignee Id,Reporter,Reporter Id,Creator,Creator Id,Created,Updated,Last Viewed,Resolved,Due date,Votes,Description,Environment,Watchers,Watchers Id,Original estimate,Remaining Estimate,Time Spent,Work Ratio,Σ Original Estimate,Σ Remaining Estimate,Σ Time Spent,Security Level,Attachment,Custom field (Development),Custom field (Goals),Custom field (Issue color),Custom field (Rank),Custom field (Start date),Custom field (Team),Custom field (Vulnerability),Status Category,Status Category Changed
+Sign Up sonrası confirmation maili kullanıcıya ulaşmıyor,KAN-1,10000,Task,In Progress,KAN,PowerPulse QA,software,Yagmur Yeşilkanat,712020:18215401-6c81-42c7-a1ad-508a5b7c6d17,,Medium,,Yagmur Yeşilkanat,712020:18215401-6c81-42c7-a1ad-508a5b7c6d17,Yagmur Yeşilkanat,712020:18215401-6c81-42c7-a1ad-508a5b7c6d17,Yagmur Yeşilkanat,712020:18215401-6c81-42c7-a1ad-508a5b7c6d17,19/May/26 2:17 PM,19/May/26 2:46 PM,19/May/26 2:26 PM,,,0,"*Severity:*Major	*Priority:*	High
+
+*Pre-conditions:*
+
+# Kullanıcı Sign Up sayfasında olmalı				
+# Kullanıcının erişilebilir/geçerli bir email adresi olmalı	
+
+
+
+	*Steps to reproduce:*	
+
+1	Sign Up sayfasına git				
+2	Geçerli bir isim gir				
+3	Geçerli bir email adresi ve password gir				
+4	Sign up butonuna tıkla				
+5	Ekranda confirmation emaili gönderildiğine dair açılan modülü kontrol et				
+6	Mailin geldiğini kontrol etmek için kayıtlı olunan email adresine bak	
+
+
+
+*Actual result:*					
+Ekranda ""A confirmation has been sent to your email. Please confirm your email!"" bildiriminin olduğu modül açılıyor ancak					
+kullanıcıya confirmattion mesajı ulaşmıyor	
+
+													
+
+*Expected result:*					
+Sign Up işlemi başarılı olduğunda kullanıcının email adresine confirmation maili gönderilmeli ve kullanıcı mail üzerinden hesabını					
+doğrulayabilmelidir.					",,Yagmur Yeşilkanat,712020:18215401-6c81-42c7-a1ad-508a5b7c6d17,,,,,,,,,,,,,0|hzzzzz:,,,,In Progress,19/May/26 2:46 PM
+Sign up formunda boşluk içeren password için validasyon mesajı görüntülenmiyor,KAN-3,10002,Task,In Progress,KAN,PowerPulse QA,software,Yagmur Yeşilkanat,712020:18215401-6c81-42c7-a1ad-508a5b7c6d17,,Medium,,,,Yagmur Yeşilkanat,712020:18215401-6c81-42c7-a1ad-508a5b7c6d17,Yagmur Yeşilkanat,712020:18215401-6c81-42c7-a1ad-508a5b7c6d17,19/May/26 2:27 PM,19/May/26 2:46 PM,19/May/26 2:27 PM,,,0,"*Severity:*Minor	*Priority:*	Medium
+
+*Pre-conditions:*					
+1. Kullanıcı Sign Up sayfasında olmalı	
+
+	*Steps to reproduce:*					
+1. Sign up sayfasına git				
+2.Name alanına geçerli bir isim gir				
+3.Email alanına geçerli bir email adresi gir				
+4.Password alanına boşluk içeren bir değer gir				
+5.Sign up butonuna tıkla						
+
+
+
+*Actual result:*					
+Boşluk içeren password için ""password boşluk içermez"" validasyon mesajı görüntülenmiyor ve boşluk değeri ile kayıt yapılabiliyor					
+*Expected result:*					
+Password alanı boşluk karakteri içerdiğinde kayıt işlemi engellenmeli ve ""password boşluk içermez"" hata mesajı görüntülenmelidir.					",,Yagmur Yeşilkanat,712020:18215401-6c81-42c7-a1ad-508a5b7c6d17,,,,,,,,,,,,,0|i00003:,,,,In Progress,19/May/26 2:46 PM
+[API/UI] API yalnızca rakamlardan oluşan password ile kullanıcı oluşturuyor ancak UI aynı password ile login'e izin vermiyor,KAN-16,10015,Task,In Progress,KAN,PowerPulse QA,software,Yagmur Yeşilkanat,712020:18215401-6c81-42c7-a1ad-508a5b7c6d17,,Medium,,,,Yagmur Yeşilkanat,712020:18215401-6c81-42c7-a1ad-508a5b7c6d17,Yagmur Yeşilkanat,712020:18215401-6c81-42c7-a1ad-508a5b7c6d17,19/May/26 3:14 PM,19/May/26 3:36 PM,19/May/26 3:15 PM,,,0,"*Severity:* Major   *Priority:* High
+
+
+
+*Pre-Conditions:*
+
+1.Kullanıcının Postman erişimi olmalı
+
+2.PowerPulse web uygulaması erişilebilir olmalı
+
+3.Kayıt için kullanılacak email adresi daha önce kayıt edilmemiş olmalı.
+
+*Step to Reproduce:*
+
+1.Postman üzerinden /api/users/register endpoint’ine POST isteği gönder
+
+2.Request body içinde yalnızca rakamlardan oluşan bir password kullan:
+
+{
+
+“name”: “TEST_BACK”
+
+“email”: “yagmurtest_goit@gmail.com”
+
+“password”: “123456”
+
+}
+
+3.API response sonucunu kontrol et.
+
+4.PowerPulse web uygulamasını aç
+
+5.Aynı email ve yalnızca rakamlardan oluşan password ile login olmayı dene
+
+
+
+
+
+*Actual Result:*
+
+API 201 Created dönüyor ve yalnızca rakamlardan oluşan password ile kullanıcı oluşturuyor. Ancak aynı kullanıcı bilgileriyle UI üzerinden login olunmak istendiğinde, password en az 1 büyük harf gerektiği belirten validation mesajı görüntüleniyor
+
+
+
+
+
+*Expected Result:*
+
+API, password validasyonunu UI ile aynı kurallara göre kontrol etmelidir. Eğer password içinde en az bir büyük harf bulunması gerekiyorsa, API yalnızca rakamlardan oluşan password ile kullanıcı oluşturulmasına izin vermemeli ve uygun bir validation mesajıyla 400 Bad Request dönmelidir.
+
+*Browser: Chrome, Tool: Postman, OS: Windows, Test Env.: PowerPulse QA*				",,Yagmur Yeşilkanat,712020:18215401-6c81-42c7-a1ad-508a5b7c6d17,,,,,,,,,,,,,0|i00005:,,,,In Progress,19/May/26 3:36 PM
+Sign Up formunda geçersiz email formatı için validasyon mesajı görüntülenmiyor,KAN-2,10001,Task,To Do,KAN,PowerPulse QA,software,Yagmur Yeşilkanat,712020:18215401-6c81-42c7-a1ad-508a5b7c6d17,,Medium,,,,Yagmur Yeşilkanat,712020:18215401-6c81-42c7-a1ad-508a5b7c6d17,Yagmur Yeşilkanat,712020:18215401-6c81-42c7-a1ad-508a5b7c6d17,19/May/26 2:22 PM,19/May/26 2:26 PM,19/May/26 2:22 PM,,,0,"*Severity:*Major	*Priority:*Medium
+
+*Pre-conditions:*					
+1. Kullanıcı,sign up sayfasında olmalıdır	
+
+			
+
+*Steps to reproduce:*					
+1	Sign up sayfasına git				
+2	Name alanına geçerli bir isim gir				
+3	Email alanına geçersiz formatta bir email gir				
+4	Password alanına geçerli bir password gir				
+5	Sign up butonuna tıkla		
+
+
+
+*Actual result:*					
+Geçersiz email formatı için hata mesajı görüntülenmiyor					
+Kullanıcı kayıt işlemine devam edebiliyor					
+*Expected result:*					
+Email alanına geçersiz formatta veri girildiğinde kullanıcıya email formatı ile ilgili hata mesajı gösterilmeli					
+ve kayıt işlemi engellenmelidir						",,Yagmur Yeşilkanat,712020:18215401-6c81-42c7-a1ad-508a5b7c6d17,,,,,,,,,,,,,0|i00007:,,,,To Do,19/May/26 2:22 PM
+ Başlangıç sayfasındaki istatistik kartlarında açıklayıcı başlık/birim bilgisi eksik,KAN-4,10003,Task,To Do,KAN,PowerPulse QA,software,Yagmur Yeşilkanat,712020:18215401-6c81-42c7-a1ad-508a5b7c6d17,,Medium,,,,Yagmur Yeşilkanat,712020:18215401-6c81-42c7-a1ad-508a5b7c6d17,Yagmur Yeşilkanat,712020:18215401-6c81-42c7-a1ad-508a5b7c6d17,19/May/26 2:30 PM,19/May/26 2:43 PM,19/May/26 2:41 PM,,,0,"*Severity:*	Minor	*Priority:*	Medium
+
+*Pre-conditions:*					
+1.Kullanıcı başlangıç sayfasında olmalı	
+
+
+
+*Steps to reproduce:*					
+1.Başlangıç sayfasını aç				
+2.Sayfada yer alan istatistik kartlarını incele				
+3.Kartlardaki sayısal değerlerin başlık, birim veya açıklama ile desteklenip desteklenmediğini kontrol et						
+
+*Actual result:*					
+Bazı istatistik kartlarında yalnızca sayısal değer görüntüleniyor, değerin neyi ifade ettiği veya hangi					
+birime ait olduğu net anlaşılmıyor					
+*Expected result:*					
+İstatistik kartlarında yer alan tüm sayısal değerler açıklayıcı başlık, birim veya kısa açıklama ile 					
+birlikte kullanıcı tarafından anlaşılır şekilde görüntülenmelidir					",,Yagmur Yeşilkanat,712020:18215401-6c81-42c7-a1ad-508a5b7c6d17,,,,,,,,,19/May/26 2:43 PM;712020:18215401-6c81-42c7-a1ad-508a5b7c6d17;2026-05-19_14-42-00.png;https://yazilimtesti25.atlassian.net/rest/api/3/attachment/content/10000,,,,0|i0000n:,,,,To Do,19/May/26 2:30 PM
+Başlangıç sayfasında toplam kayıtlı kullanıcı sayısı görüntülenmiyor,KAN-5,10004,Task,To Do,KAN,PowerPulse QA,software,Yagmur Yeşilkanat,712020:18215401-6c81-42c7-a1ad-508a5b7c6d17,,Medium,,,,Yagmur Yeşilkanat,712020:18215401-6c81-42c7-a1ad-508a5b7c6d17,Yagmur Yeşilkanat,712020:18215401-6c81-42c7-a1ad-508a5b7c6d17,19/May/26 2:41 PM,19/May/26 2:45 PM,19/May/26 2:45 PM,,,0,"*Severity:*	Minor	*Priority:*Medium
+
+
+
+*Pre-conditions:*					
+1.Kullanıcı, başlangıç sayfasında olmalıdır
+
+
+
+	*Steps to reproduce:*					
+1.Başlangıç sayfasını aç				
+2.Sayfadaki istatistik/bilgi kartlarını incele				
+3.Toplam kayıtlı kullanıcı sayısının görüntülenip görüntülenmediğini kontrol et	
+
+	*Actual result:*					
+Başlangıç sayfasında toplam kayıtlı kullanıcı sayısı  görüntülenmiyor					
+
+*Expected result:*					
+Başlangıç sayfasında uygulamaya kayıtlı toplam kullanıcı sayısı, kullanıcı tarafından anlaşılır şekilde görüntülenmelidir										",,Yagmur Yeşilkanat,712020:18215401-6c81-42c7-a1ad-508a5b7c6d17,,,,,,,,,19/May/26 2:45 PM;712020:18215401-6c81-42c7-a1ad-508a5b7c6d17;2026-05-19_14-45-24.png;https://yazilimtesti25.atlassian.net/rest/api/3/attachment/content/10001,,,,0|i0000v:,,,,To Do,19/May/26 2:41 PM
+Başlangıç sayfasında egzersiz için harcanan toplam süre bilgisi görüntülenmiyor,KAN-6,10005,Task,To Do,KAN,PowerPulse QA,software,Yagmur Yeşilkanat,712020:18215401-6c81-42c7-a1ad-508a5b7c6d17,,Medium,,,,Yagmur Yeşilkanat,712020:18215401-6c81-42c7-a1ad-508a5b7c6d17,Yagmur Yeşilkanat,712020:18215401-6c81-42c7-a1ad-508a5b7c6d17,19/May/26 2:46 PM,19/May/26 2:48 PM,19/May/26 2:46 PM,,,0,"*Severity:*	Minor	*Priority:*	Medium
+
+
+
+*Pre-conditions:*					
+1.Kullanıcı, başlangıç sayfasında olmalıdır		
+
+	*Steps to reproduce:*					
+1.Başlangıç sayfasını aç				
+2.Sayfadaki istatistik/bilgi kartlarını incele				
+3.Egzersiz için harcanan toplam süre/saat bilgisinin görüntülenip görüntülenmediğini kontrol et					
+
+*Actual result:*					
+Başlangıç sayfasında egzersiz için harcanan toplam süre/saat bilgisi açık şekilde görüntülenmiyor					
+
+*Expected result:*					
+Başlangıç sayfasında kullanıcılar tarafından egzersiz için harcanan toplam süre/saat bilgisi açıklayıcı başlık ve uygun birim bilgisiyle görüntülenmelidir.					",,Yagmur Yeşilkanat,712020:18215401-6c81-42c7-a1ad-508a5b7c6d17,,,,,,,,,,,,,0|i00013:,,,,To Do,19/May/26 2:46 PM
+Başlangıç sayfasında toplam egzersiz sayısı görüntülenmiyor,KAN-7,10006,Task,To Do,KAN,PowerPulse QA,software,Yagmur Yeşilkanat,712020:18215401-6c81-42c7-a1ad-508a5b7c6d17,,Medium,,Yagmur Yeşilkanat,712020:18215401-6c81-42c7-a1ad-508a5b7c6d17,Yagmur Yeşilkanat,712020:18215401-6c81-42c7-a1ad-508a5b7c6d17,Yagmur Yeşilkanat,712020:18215401-6c81-42c7-a1ad-508a5b7c6d17,19/May/26 2:49 PM,19/May/26 2:50 PM,19/May/26 2:49 PM,,,0,"*Severity*:Minor	*Priority:*	Medium
+
+
+
+*Pre-conditions:*					
+1.Kullanıcı, başlangıç sayfasında olmalıdır		
+
+
+
+	*Steps to reproduce:*					
+1.Başlangıç sayfasını aç				
+2.Sayfadaki istatistik/bilgi kartlarını incele				
+3.Toplam egzersiz sayısı bilgisinin görüntülenip görüntülenmediğini kontrol et			
+
+
+
+*Actual result:*					
+Başlangıç sayfasında kullanıcılar tarafından gerçekleştirilen toplam egzersiz sayısı görüntülenmiyor					
+
+*Expected result:*					
+Başlangıç sayfasında kullanıcılar tarafından gerçekleştirilen toplam egzersiz sayısı açıklayıcı başlık veya kısa açıklama ile birlikte görüntülenmelidir					",,Yagmur Yeşilkanat,712020:18215401-6c81-42c7-a1ad-508a5b7c6d17,,,,,,,,,,,,,0|i0001b:,,,,To Do,19/May/26 2:49 PM
+Profil ayarları sayfasında doğum tarihi alanı için açıklayıcı etiket bulunmuyor,KAN-8,10007,Task,To Do,KAN,PowerPulse QA,software,Yagmur Yeşilkanat,712020:18215401-6c81-42c7-a1ad-508a5b7c6d17,,Medium,,Yagmur Yeşilkanat,712020:18215401-6c81-42c7-a1ad-508a5b7c6d17,Yagmur Yeşilkanat,712020:18215401-6c81-42c7-a1ad-508a5b7c6d17,Yagmur Yeşilkanat,712020:18215401-6c81-42c7-a1ad-508a5b7c6d17,19/May/26 2:51 PM,19/May/26 2:53 PM,19/May/26 2:51 PM,,,0,"*Severity:*Minor	*Priority:*	Medium
+
+*Pre-conditions:*					
+1.Kullanıcı, giriş yapmış olmalıdır		
+
+		
+
+*Steps to reproduce:*					
+1.Profil settings sayfasını aç				
+2. ""Desired weight"" alanının yanındaki tarih alanını incele				
+3.Tarih alanının açıklayıcı bir etikete sahip olup olmadığını kontrol et	
+
+			
+
+*Actual result:*					
+Tarih alanının üzerinde veya yanında alanın doğum tarihi olduğunu belirten açıklayıcı bir etiket bulunmuyor					
+
+*Expected result:*					
+Tarih alanının üzerinde veya yanında ""Birthday"", ""Birth date"" ya da ""Doğum Tarihi gibi açıklayıcı bir etiket görüntülenmelidir					",,Yagmur Yeşilkanat,712020:18215401-6c81-42c7-a1ad-508a5b7c6d17,,,,,,,,,19/May/26 2:53 PM;712020:18215401-6c81-42c7-a1ad-508a5b7c6d17;2026-05-19_14-52-42.png;https://yazilimtesti25.atlassian.net/rest/api/3/attachment/content/10002,,,,0|i0001j:,,,,To Do,19/May/26 2:51 PM
+Başlangıç sayfasındaki sağ alt istatistik kartı ekran sınırlarının dışına taşıyor ve içerik kesiliyor,KAN-9,10008,Task,To Do,KAN,PowerPulse QA,software,Yagmur Yeşilkanat,712020:18215401-6c81-42c7-a1ad-508a5b7c6d17,,Medium,,Yagmur Yeşilkanat,712020:18215401-6c81-42c7-a1ad-508a5b7c6d17,Yagmur Yeşilkanat,712020:18215401-6c81-42c7-a1ad-508a5b7c6d17,Yagmur Yeşilkanat,712020:18215401-6c81-42c7-a1ad-508a5b7c6d17,19/May/26 2:53 PM,19/May/26 2:55 PM,19/May/26 2:53 PM,,,0,"*Severity:*Major	*Priority:*	High
+
+*Pre-conditions:*					
+1.Kullanıcı Power Pulse başlangıç sayfasında olmalı				
+2.Uygulama Chrome tarayıcıda açılmış olmalı				
+3.Masaüstü görünüm olmalı				
+
+*Steps to reproduce:*					
+1.Power pulse başlangıç sayfasını aç				
+2.Sayfanın sağ alt kısmındaki turuncu istatistik kartını kontrol et				
+3.Kartın ekran sınırına göre konumunu ve içindeki sayının görünürlüğünü incele				
+
+*Actual result:*					
+Sağ alt istatistik kartı ekranın sağ kenarına taşıyor ve kart içindeki sayı tam olarak görüntülenmiyor					
+
+*Expected result:*					
+Tüm istatistik kartları ekran genişliği içinde kalmalı, içerikler kesilmeden ve taşmadan eksiksiz görüntülenmelidir					",,Yagmur Yeşilkanat,712020:18215401-6c81-42c7-a1ad-508a5b7c6d17,,,,,,,,,,,,,0|i0001r:,,,,To Do,19/May/26 2:53 PM
+Aktivite seviyesi değiştirildiğinde günlük spor süresi değeri güncellenmiyor,KAN-10,10009,Task,To Do,KAN,PowerPulse QA,software,Yagmur Yeşilkanat,712020:18215401-6c81-42c7-a1ad-508a5b7c6d17,,Medium,,Yagmur Yeşilkanat,712020:18215401-6c81-42c7-a1ad-508a5b7c6d17,Yagmur Yeşilkanat,712020:18215401-6c81-42c7-a1ad-508a5b7c6d17,Yagmur Yeşilkanat,712020:18215401-6c81-42c7-a1ad-508a5b7c6d17,19/May/26 2:55 PM,19/May/26 2:57 PM,19/May/26 2:55 PM,,,0,"*Severity:*	Major	*Priority:*	High
+
+
+
+*Pre-conditions:*					
+1.Kullanıcı giriş yapmış olmalı				
+2.Kullanıcı profile settings sayfasında olmalı	
+
+	*Steps to reproduce:*					
+1.Profile settings sayfasını aç				
+2.Mevcut ""Daily norm of sports"" değerini kontrol et				
+3.Aktivite seviyesini değiştir (örn:Sedentary lifestyle seç)				
+4.Save butonuna tıkla				
+5.Sayfayı yenile				
+6.""Daily norm of sports"" değerini tekrar kontrol et						
+
+*Actual result:* 					
+Aktivite seviyesi değiştirildiğinde ""Daily norm of sports"" değeri seçilen yeni aktivite seviyesine göre güncellenmiyor veya eski değerle aynı kalıyor					
+*Expected result:*					
+Aktivite seviyesi değiştirildiğinde ""Daily norm of sports"" değeri seçilen yeni aktivite seviyesine göre güncellenmelidir					",,Yagmur Yeşilkanat,712020:18215401-6c81-42c7-a1ad-508a5b7c6d17,,,,,,,,,,,,,0|i0001z:,,,,To Do,19/May/26 2:55 PM
+Name alanı minimum 2 karakter kuralını doğrulamıyor,KAN-11,10010,Task,To Do,KAN,PowerPulse QA,software,Yagmur Yeşilkanat,712020:18215401-6c81-42c7-a1ad-508a5b7c6d17,,Medium,,,,Yagmur Yeşilkanat,712020:18215401-6c81-42c7-a1ad-508a5b7c6d17,Yagmur Yeşilkanat,712020:18215401-6c81-42c7-a1ad-508a5b7c6d17,19/May/26 2:57 PM,19/May/26 2:59 PM,19/May/26 2:57 PM,,,0,"*Severity:*	Major	*Priority:*	High
+
+
+
+*Pre-conditions:*					
+1.Kullanıcı, giriş yapmış olmalı				
+2.Kullanıcı, profile settings sayfasında olmalı		
+
+*Steps to reproduce:*					
+1.Profile settings sayfasını aç				
+2.Name alanına 1 karakter gir				
+3.Save alanına tıkla				
+4.Sistem davranışını kontrol et	
+
+*Actual result:*					
+Name alanına 1 karakter girildiğinde hata mesajı görüntülenmiyor ve kullanıcı değeri kaydedebiliyor					
+
+*Expected result:*					
+Name alanı minimum 2 karakter olmalıdır. Kullanıcı 1 karakter girdiğinde hata mesajı görüntülenmeli ve kayıt işlemi engellenmelidir								",,Yagmur Yeşilkanat,712020:18215401-6c81-42c7-a1ad-508a5b7c6d17,,,,,,,,,,,,,0|i00027:,,,,To Do,19/May/26 2:57 PM
+Name alanı Latin harf haricindeki karakterleri kabul ediyor,KAN-12,10011,Task,To Do,KAN,PowerPulse QA,software,Yagmur Yeşilkanat,712020:18215401-6c81-42c7-a1ad-508a5b7c6d17,,Medium,,Yagmur Yeşilkanat,712020:18215401-6c81-42c7-a1ad-508a5b7c6d17,Yagmur Yeşilkanat,712020:18215401-6c81-42c7-a1ad-508a5b7c6d17,Yagmur Yeşilkanat,712020:18215401-6c81-42c7-a1ad-508a5b7c6d17,19/May/26 2:59 PM,19/May/26 3:01 PM,19/May/26 2:59 PM,,,0,"*Severity:*	Major	*Priority:*	High
+
+*Pre-conditions:*					
+1.Kullanıcı, giriş yapmış olmalı				
+2.Kullanıcı, profile settings sayfasında olmalı		
+
+	*Steps to reproduce:*					
+1.Profile settings sayfasını aç				
+2.Name alanına Türkçe karakter içeren bir değer gir. (Örn: Yağmur)				
+3.Save alanına tıkla				
+4.Sistem davranışını kontrol et		
+
+	*Actual result:*					
+Name alanı Türkçe karakter içeren değeri kabul ediyor ve uyarı mesajı göstermiyor					
+
+*Expected result:*					
+Name alanı yalnızca Latin harfleri kabul etmelidir, Türkçe karakter girildiğinde kullanıcıya uygun bir uyarı mesajı gösterilmeli ve kayıt işlemi engellenmelidir						
+
+
+
+*Environment:*	Browser: Chrome, OS: Windows 10				",,Yagmur Yeşilkanat,712020:18215401-6c81-42c7-a1ad-508a5b7c6d17,,,,,,,,,,,,,0|i0002f:,,,,To Do,19/May/26 2:59 PM
+Diary sayfasında sağ ok butonu tarihi bir sonraki güne geçirmiyor,KAN-13,10012,Task,To Do,KAN,PowerPulse QA,software,Yagmur Yeşilkanat,712020:18215401-6c81-42c7-a1ad-508a5b7c6d17,,Medium,,,,Yagmur Yeşilkanat,712020:18215401-6c81-42c7-a1ad-508a5b7c6d17,Yagmur Yeşilkanat,712020:18215401-6c81-42c7-a1ad-508a5b7c6d17,19/May/26 3:01 PM,19/May/26 3:04 PM,19/May/26 3:01 PM,,,0,"*Severity*:Major	*Priority:*	High
+
+
+
+*Pre-conditions:*					
+1.Kullanıcı, giriş yapmış olmalı				
+2.Kullanıcı, Diary sayfasında olmalı	
+
+*Steps to reproduce*:					
+1.Diary sayfasını aç				
+2.Mevcut seçili tarihi kontrol et				
+3.Tarih alanının sağındaki sağ ok butonuna tıkla				
+4.Tarihin değişip değişmediğini kontrol et		
+
+*Actual result:*					
+Sağ ok butonuna tıklandığında seçili tarih bir sonraki güne değişmiyor					
+
+*Expected result:*					
+Sağ ok butonuna tıklandığında seçili tarih bir sonraki güne geçmelidir									
+
+*Environment:	Browser: Chrome, OS: Windows 10*				",,Yagmur Yeşilkanat,712020:18215401-6c81-42c7-a1ad-508a5b7c6d17,,,,,,,,,,,,,0|i0002n:,,,,To Do,19/May/26 3:01 PM
+Başlangıç sayfasında farklı ekran genişliklerinde bazı içerikler ekran sınırları içinde düzgün görüntülenmiyor,KAN-14,10013,Task,To Do,KAN,PowerPulse QA,software,Yagmur Yeşilkanat,712020:18215401-6c81-42c7-a1ad-508a5b7c6d17,,Medium,,,,Yagmur Yeşilkanat,712020:18215401-6c81-42c7-a1ad-508a5b7c6d17,Yagmur Yeşilkanat,712020:18215401-6c81-42c7-a1ad-508a5b7c6d17,19/May/26 3:04 PM,19/May/26 3:07 PM,19/May/26 3:04 PM,,,0,"*Severity:*Major	*Priority:*	High
+
+*Pre-conditions:*					
+1.Kullanıcı, Power Pulse başlangıç sayfasında olmalı				
+2.DevTools responsive mode açık olmalı		
+
+
+
+*Steps to reproduce:*					
+1.Power Pulse başlangıç sayfasını aç				
+2.Chrome DevTools'u aç				
+3.Responsive Mode'a geç				
+4.Viewport değerini 320x568 px olarak ayarla				
+5.Sayfadaki başlık, butonlar, görsel ve istatistik kartlarını kontrol et				
+6.Viewport değerini sırasıyla 375x667 px, 768x1024 px ve 1280x720 px olarak değiştir				
+7.Her ekran genişliğinde içeriklerin kesilipp kesilmediğini, taşma olup olmadığını ve hizalamaların düzgün olup olmadığını kontrol et	
+
+	*Actual result:*					
+Bazı ekran genişliklerinde başlangıç sayfasındaki içerikler viewport'a düzgün uyum sağlamıyor. sağ alttaki istatistik kartı düzgün görüntülenmiyor. Kart içeriği ekran sınırları dışına taşıyor ve sayı tam okunmuyor					
+       *Expected result:*					
+Başlangıç sayfası, 320 px, 375 px, 768 px ve 1280 px ekran genişliklerinde responsive tasarıma uygun şekilde görüntülenmelidir. Metinler, butonlar,	görseller ve istatistik kartları kesilmeden, üst üste binmeden ve ekran dışına taşmadan okunabilir olmalıdır.
+
+
+
+		*Environment:*	Browser: Chrome, OS: Windows 10, DevTools										",,Yagmur Yeşilkanat,712020:18215401-6c81-42c7-a1ad-508a5b7c6d17,,,,,,,,,,,,,0|i0002v:,,,,To Do,19/May/26 3:04 PM
+Başlangıç sayfasında kullanıcıların yaktığı toplam kalori kcal cinsinden görünmüyor,KAN-15,10014,Task,To Do,KAN,PowerPulse QA,software,Yagmur Yeşilkanat,712020:18215401-6c81-42c7-a1ad-508a5b7c6d17,,Medium,,Yagmur Yeşilkanat,712020:18215401-6c81-42c7-a1ad-508a5b7c6d17,Yagmur Yeşilkanat,712020:18215401-6c81-42c7-a1ad-508a5b7c6d17,Yagmur Yeşilkanat,712020:18215401-6c81-42c7-a1ad-508a5b7c6d17,19/May/26 3:08 PM,19/May/26 3:10 PM,19/May/26 3:08 PM,,,0,"*Severity:*Minor	*Priority:*	Medium
+
+
+
+*Pre-conditions:*					
+1.Kullanıcı, başlangıç sayfasında olmalıdır.
+
+*Steps to reproduce:*					
+1.Başlangıç sayfasını aç				
+2.Sayfadaki istatistik/bilgi kartlarını incele				
+3.Kullanıcılar tarafından yakılan toplam kalori bilgisinin görüntülenip görüntülenmediğini kontrol et
+
+*Actual result:*					
+Başlangıç sayfasında kullanıcılar tarafından yakılan toplam kalori değeri AÇIK şekilde görüntülenmemektedir					
+
+*Expected result:*					
+Başlangıç sayfasında kullanıcılar tarafından yakılan toplam kalori sayısı açıklayıcı başlık veya 					
+kısa açıklama ile birlikte görüntülenmelidir		
+
+
+
+*Environment:	Browser: Chrome, OS: Windows 10*														",,Yagmur Yeşilkanat,712020:18215401-6c81-42c7-a1ad-508a5b7c6d17,,,,,,,,,,,,,0|i00033:,,,,To Do,19/May/26 3:08 PM
+Kayıtlı kullanıcı verification email tekrar gönderme isteği 500 Internal Server Error dönüyor,KAN-17,10016,Task,To Do,KAN,PowerPulse QA,software,Yagmur Yeşilkanat,712020:18215401-6c81-42c7-a1ad-508a5b7c6d17,,Medium,,,,Yagmur Yeşilkanat,712020:18215401-6c81-42c7-a1ad-508a5b7c6d17,Yagmur Yeşilkanat,712020:18215401-6c81-42c7-a1ad-508a5b7c6d17,19/May/26 3:38 PM,19/May/26 3:50 PM,19/May/26 3:38 PM,,,0,"*Severity:* Major  *Priority:* Medium
+
+
+
+*Pre-conditions:*	
+
+	1.Kullanıcının Postman erişimi olmalı			
+
+        2.PowerPulse QA API ortamı erişilebilir olmalıdır
+
+        3.Test için kullanılan email adresi sistemde kayıtlı olmalıdır.		
+
+*Steps to reproduce:*								
+
+# Postman üzerinden api/users/verify endpoint’ine POST isteği gönder
+# Request body içinde kayıtlı kullanıcı email adresini kullan:
+
+{
+
+“email”: “yagmurata@gmail.com”
+
+}
+
+# API response sonucunu kontrol et.
+
+
+
+*Actual Result:*
+
+API 500 Internal Server Error dönüyor. Bu neden verification email tekrar gönderme işleminin başarılı olup olmadığı anlaşılmıyor.
+
+*Expected Result:*
+
+API 200 OK dönmeli ve verification email’in tekrar gönderildiğini belirten “Verification emain sent” mesajı göstermelidir. Eğer işlem gerçekleştirilemiyorsa, sistem uygun bir 4xx hata kodu ve açıkçayıcı hata mesajı dönmelidir",,Yagmur Yeşilkanat,712020:18215401-6c81-42c7-a1ad-508a5b7c6d17,,,,,,,,,,,,,0|i0003b:,,,,To Do,19/May/26 3:38 PM
